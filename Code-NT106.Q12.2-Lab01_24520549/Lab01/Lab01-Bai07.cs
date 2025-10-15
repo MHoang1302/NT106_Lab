@@ -53,10 +53,13 @@ namespace Lab01
                 double score;
                 if (!double.TryParse(data[i].Trim(), out score))
                 {
-                    MessageBox.Show("Nhập sai Format","Thông báo lỗi",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                    tb_ans.Clear();
-                    tb_info.Focus();
-                    return;
+                    if (score < 0 && score > 10)
+                    {
+                        MessageBox.Show("Nhập sai Format", "Thông báo lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        tb_ans.Clear();
+                        tb_info.Focus();
+                        return;
+                    }
                 }
                 else
                 {
