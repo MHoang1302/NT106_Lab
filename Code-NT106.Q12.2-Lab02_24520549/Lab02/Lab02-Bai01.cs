@@ -21,14 +21,23 @@ namespace Lab02
         private void btn_doc_Click(object sender, EventArgs e)
         {
             rtb_ans.Clear();
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = ("Text files (*.txt)|*.txt");
-            ofd.ShowDialog();
-            FileStream fs = new FileStream(ofd.FileName, FileMode.OpenOrCreate);
-            StreamReader sr = new StreamReader(fs);
-            rtb_ans.Text = sr.ReadToEnd();
-            sr.Close();
-            fs.Close();
+            try
+            {
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.Filter = ("Text files (*.txt)|*.txt");
+                ofd.ShowDialog();
+                using (FileStream fs = new FileStream(ofd.FileName, FileMode.OpenOrCreate))
+                {
+                    using (StreamReader sr = new StreamReader(fs))
+                    {
+                        rtb_ans.Text = sr.ReadToEnd();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi đọc file", "Thông báo lỗi");
+            }
         }
 
         private void btn_ghi_Click(object sender, EventArgs e)
@@ -47,7 +56,7 @@ namespace Lab02
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btn_thoat_Click(object sender, EventArgs e)
         {
             this.Close();
         }

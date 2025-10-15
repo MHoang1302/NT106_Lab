@@ -117,7 +117,7 @@ namespace Lab01
         {
             string input = tb_num.Text;
             long ans;
-            if ((input.Length < 12 || (input.Length == 13 && input[0] == '-')) && long.TryParse(input, out ans)) 
+            if ((input.Length <= 12 || (input.Length == 13 && input[0] == '-')) && long.TryParse(input, out ans)) 
             {
                 tb_ans.Text = DocSo(input);
             }

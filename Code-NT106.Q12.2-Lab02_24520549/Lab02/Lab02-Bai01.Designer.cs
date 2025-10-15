@@ -31,7 +31,7 @@
             btn_ghi = new Button();
             btn_doc = new Button();
             rtb_ans = new RichTextBox();
-            button1 = new Button();
+            btn_thoat = new Button();
             SuspendLayout();
             // 
             // btn_ghi
@@ -67,17 +67,17 @@
             rtb_ans.TabIndex = 3;
             rtb_ans.Text = "";
             // 
-            // button1
+            // btn_thoat
             // 
-            button1.BackColor = Color.AliceBlue;
-            button1.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            button1.Location = new Point(35, 311);
-            button1.Name = "button1";
-            button1.Size = new Size(138, 69);
-            button1.TabIndex = 4;
-            button1.Text = "Thoát";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            btn_thoat.BackColor = Color.AliceBlue;
+            btn_thoat.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            btn_thoat.Location = new Point(35, 311);
+            btn_thoat.Name = "btn_thoat";
+            btn_thoat.Size = new Size(138, 69);
+            btn_thoat.TabIndex = 4;
+            btn_thoat.Text = "Thoát";
+            btn_thoat.UseVisualStyleBackColor = false;
+            btn_thoat.Click += btn_thoat_Click;
             // 
             // Lab02_Bai01
             // 
@@ -85,7 +85,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.MistyRose;
             ClientSize = new Size(800, 450);
-            Controls.Add(button1);
+            Controls.Add(btn_thoat);
             Controls.Add(rtb_ans);
             Controls.Add(btn_doc);
             Controls.Add(btn_ghi);
@@ -99,6 +99,6 @@
         private Button btn_ghi;
         private Button btn_doc;
         private RichTextBox rtb_ans;
-        private Button button1;
+        private Button btn_thoat;
     }
 }
