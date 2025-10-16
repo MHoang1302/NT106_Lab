@@ -45,3 +45,6 @@ E:\NT106_Lab\Code-NT106.Q12.2-Lab02_24520549\Lab02\obj\Debug\net9.0-windows\refi
 E:\NT106_Lab\Code-NT106.Q12.2-Lab02_24520549\Lab02\obj\Debug\net9.0-windows\Lab02.pdb
 E:\NT106_Lab\Code-NT106.Q12.2-Lab02_24520549\Lab02\obj\Debug\net9.0-windows\Lab02.genruntimeconfig.cache
 E:\NT106_Lab\Code-NT106.Q12.2-Lab02_24520549\Lab02\obj\Debug\net9.0-windows\ref\Lab02.dll
+E:\NT106_Lab\Code-NT106.Q12.2-Lab02_24520549\Lab02\bin\Debug\net9.0-windows\System.Data.SQLite.dll
+E:\NT106_Lab\Code-NT106.Q12.2-Lab02_24520549\Lab02\obj\Debug\net9.0-windows\Lab02.csproj.AssemblyReference.cache
+E:\NT106_Lab\Code-NT106.Q12.2-Lab02_24520549\Lab02\obj\Debug\net9.0-windows\Lab02.csproj.Up2Date
