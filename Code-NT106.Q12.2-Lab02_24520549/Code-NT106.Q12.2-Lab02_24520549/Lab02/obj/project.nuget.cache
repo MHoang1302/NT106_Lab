@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "dgSpecHash": "T65+6jRzV6I=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\LENOVO\\Desktop\\NT106_Lab-master\\NT106_Lab-master\\Code-NT106.Q12.2-Lab02_24520549\\Lab02\\Lab02.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\LENOVO\\.nuget\\packages\\microsoft.data.sqlite.core\\9.0.10\\microsoft.data.sqlite.core.9.0.10.nupkg.sha512",
+    "C:\\Users\\LENOVO\\.nuget\\packages\\sourcegear.sqlite3\\3.50.4.2\\sourcegear.sqlite3.3.50.4.2.nupkg.sha512",
+    "C:\\Users\\LENOVO\\.nuget\\packages\\sqlite\\3.13.0\\sqlite.3.13.0.nupkg.sha512",
+    "C:\\Users\\LENOVO\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\3.0.2\\sqlitepclraw.bundle_e_sqlite3.3.0.2.nupkg.sha512",
+    "C:\\Users\\LENOVO\\.nuget\\packages\\sqlitepclraw.config.e_sqlite3\\3.0.2\\sqlitepclraw.config.e_sqlite3.3.0.2.nupkg.sha512",
+    "C:\\Users\\LENOVO\\.nuget\\packages\\sqlitepclraw.core\\3.0.2\\sqlitepclraw.core.3.0.2.nupkg.sha512",
+    "C:\\Users\\LENOVO\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.1.11\\sqlitepclraw.lib.e_sqlite3.2.1.11.nupkg.sha512",
+    "C:\\Users\\LENOVO\\.nuget\\packages\\sqlitepclraw.provider.e_sqlite3\\3.0.2\\sqlitepclraw.provider.e_sqlite3.3.0.2.nupkg.sha512",
+    "C:\\Users\\LENOVO\\.nuget\\packages\\system.data.sqlite\\2.0.2\\system.data.sqlite.2.0.2.nupkg.sha512",
+    "C:\\Users\\LENOVO\\.nuget\\packages\\system.memory\\4.6.3\\system.memory.4.6.3.nupkg.sha512"
+  ],
+  "logs": []
+}
