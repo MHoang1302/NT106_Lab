@@ -23,6 +23,7 @@ namespace Lab03_Bai06
         {
             InitializeComponent();
 
+            //Khởi tạo Listview hiển thị tin nhắn
             lv_Message.View = View.Details;
             lv_Message.Columns.Add("Message", -2);
         }
@@ -34,7 +35,6 @@ namespace Lab03_Bai06
             serverThread.IsBackground = true;
             serverThread.Start();
 
-            btn_Listen.Enabled = false;
         }
 
         private void StartServer()
@@ -61,7 +61,7 @@ namespace Lab03_Bai06
             }
         }
 
-        // 3. Xử lý tin nhắn từ một client
+        //Xử lý tin nhắn từ client
         private void HandleClient(Socket client)
         {
             string clientName = null;
@@ -72,12 +72,13 @@ namespace Lab03_Bai06
                     byte[] buffer = new byte[1024 * 5000];
                     int receivedBytes = client.Receive(buffer);
 
-                    if (receivedBytes == 0) // Client ngắt kết nối
+                    //Client ngắt kết nối
+                    if (receivedBytes == 0) 
                     {
                         break;
                     }
 
-                    // Cắt mảng byte
+                    //Lấy dữ liệu thực sự mà client gửi và bỏ đi phần dữ liệu thừa
                     byte[] actualData = new byte[receivedBytes];
                     Array.Copy(buffer, actualData, receivedBytes);
 
@@ -86,26 +87,33 @@ namespace Lab03_Bai06
 
                     switch (packet.Type)
                     {
+                        //Gói tin kết nối
                         case PacketType.Connect:
                             clientName = packet.Name;
-                            // Thêm client vào Dictionary
+                            //Thêm client vào Dictionary
                             clients.Add(client, clientName);
-                            Notification($"'{clientName}' connected from {client.RemoteEndPoint}");
-                            // Thông báo cho mọi người
+                            Notification($"New client connected from {client.RemoteEndPoint} ");
+                            //Thông báo cho mọi người
                             Broadcast(PacketType.Connect, $"{clientName} joined the group.", null);
-                            // Cập nhật danh sách
+                            //Cập nhật danh sách người dùng
                             BroadcastParticipantList();
                             break;
 
-                        // Gói tin chat
+                        //Gói tin chat
                         case PacketType.Chat:
                             string formattedMessage = $"{clientName}: {packet.Message}";
                             Notification(formattedMessage);
-                            // Gửi cho các client khác (trừ người gửi)
+                            //Gửi cho các client khác trừ người gửi 
                             Broadcast(PacketType.Chat, formattedMessage, client);
                             break;
 
-                        // Gói tin ngắt kết nối
+                        case PacketType.PrivateChat:
+                            // Không Log() theo yêu cầu của bạn
+                            // Chỉ chuyển tiếp tin nhắn
+                            SendPrivateMessage(clientName, packet.TargetName, packet.Message);
+                            break;
+
+                        //Gói tin ngắt kết nối
                         case PacketType.Disconnect:
                             break;
                     }
@@ -117,7 +125,7 @@ namespace Lab03_Bai06
             }
             finally
             {
-                // Dọn dẹp khi client thoát
+                //Dọn dẹp khi client thoát
                 if (clientName != null)
                 {
                     clients.Remove(client);
@@ -132,11 +140,47 @@ namespace Lab03_Bai06
             }
         }
 
-        private void Broadcast(PacketType type, string message, Socket excludeClient)
+        //Gửi tín hiệu nhắn tin riêng cho người dùng
+        private void SendPrivateMessage(string sender, string target, string message)
         {
-            // Tạo một danh sách clients an toàn để duyệt
-            List<Socket> currentClients = new List<Socket>(clients.Keys);
+            Socket targetSocket = null;
 
+            //Tìm socket của người nhận
+            foreach (var pair in clients)
+            {
+                if (pair.Value == target)
+                {
+                    targetSocket = pair.Key;
+                    break;
+                }
+            }
+
+            if (targetSocket != null)
+            {
+                //Tạo gói tin private để gửi cho người nhận
+                ChatPacket privatePacket = new ChatPacket
+                {
+                    Type = PacketType.PrivateChat,
+                    //Báo cho người nhận biết ai đã gửi
+                    SenderName = sender,
+                    Message = message
+                };
+
+                try
+                {
+                    targetSocket.Send(Serialize(privatePacket));
+                }
+                catch
+                { }
+            }
+        }
+
+        private void Broadcast(PacketType type, string message, Socket SenderClient)
+        {
+            //Tạo một danh sách clients hiện tại 
+            List<Socket> currClients = new List<Socket>(clients.Keys);
+
+            //Tạo packet và mã hoã nó 
             ChatPacket packet = new ChatPacket
             {
                 Type = type,
@@ -144,26 +188,24 @@ namespace Lab03_Bai06
             };
             byte[] data = Serialize(packet);
 
-            foreach (Socket client in currentClients)
+            foreach (Socket client in currClients)
             {
-                if (client != excludeClient) // Không gửi lại cho người gửi (nếu là chat)
+                // Không gửi lại cho người gửi
+                if (client != SenderClient)
                 {
                     try
                     {
                         client.Send(data);
                     }
-                    catch
-                    {
-                        // Xử lý nếu client này cũng vừa ngắt kết nối
-                    }
+                    catch{}
                 }
             }
         }
 
-        // 5. Gửi danh sách participants đã cập nhật
+        //Gửi danh sách participants đã cập nhật
         private void BroadcastParticipantList()
         {
-            List<Socket> currentClients = new List<Socket>(clients.Keys);
+            List<Socket> currClients = new List<Socket>(clients.Keys);
             List<string> names = clients.Values.ToList(); // Lấy list tên
 
             ChatPacket packet = new ChatPacket
@@ -173,7 +215,7 @@ namespace Lab03_Bai06
             };
             byte[] data = Serialize(packet);
 
-            foreach (Socket client in currentClients)
+            foreach (Socket client in currClients)
             {
                 try
                 {
@@ -183,7 +225,7 @@ namespace Lab03_Bai06
             }
         }
 
-        // 6. Hiển thị thông báo và tin nhắn
+        //Hiển thị thông báo và tin nhắn
         private void Notification(string message)
         {
             if (lv_Message.InvokeRequired)
@@ -211,17 +253,16 @@ namespace Lab03_Bai06
             return JsonSerializer.Deserialize<T>(data);
         }
 
-        // 7. Dọn dẹp khi đóng Form Server
+        //Ngắt kết nối các client khi đóng server
         private void Server_FormClosed(object sender, FormClosedEventArgs e)
         {
-            List<Socket> currentClients = new List<Socket>(clients.Keys);
-            foreach (Socket client in currentClients)
+            List<Socket> currClients = new List<Socket>(clients.Keys);
+            foreach (Socket client in currClients)
             {
                 client.Close();
             }
             server?.Stop();
         }
-
 
     }
 }

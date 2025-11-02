@@ -11,7 +11,8 @@ namespace Lab03_Bai06
         Connect,
         Chat,
         Disconnect,
-        UpdateParticipants
+        UpdateParticipants,
+        PrivateChat 
     }
 
     [Serializable]
@@ -21,5 +22,7 @@ namespace Lab03_Bai06
         public string Name { get; set; }
         public string Message { get; set; }
         public List<string> Participants { get; set; }
+        public string TargetName {  get; set; }
+        public string SenderName { get; set;}
     }
 }

@@ -17,3 +17,4 @@ C:\Users\Admin\source\repos\NT106_Lab\Code-NT106.Q12.2-Lab03-24520549\Lab03_Bai0
 C:\Users\Admin\source\repos\NT106_Lab\Code-NT106.Q12.2-Lab03-24520549\Lab03_Bai06\obj\Debug\net9.0-windows\Lab03_Bai06.genruntimeconfig.cache
 C:\Users\Admin\source\repos\NT106_Lab\Code-NT106.Q12.2-Lab03-24520549\Lab03_Bai06\obj\Debug\net9.0-windows\ref\Lab03_Bai06.dll
 C:\Users\Admin\source\repos\NT106_Lab\Code-NT106.Q12.2-Lab03-24520549\Lab03_Bai06\obj\Debug\net9.0-windows\Lab03_Bai06.Client_Global.resources
+C:\Users\Admin\source\repos\NT106_Lab\Code-NT106.Q12.2-Lab03-24520549\Lab03_Bai06\obj\Debug\net9.0-windows\Lab03_Bai06.Client_Private.resources

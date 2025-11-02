@@ -81,6 +81,7 @@ namespace Lab03_Bai06
             lb_Participants.Name = "lb_Participants";
             lb_Participants.Size = new Size(120, 379);
             lb_Participants.TabIndex = 5;
+            lb_Participants.SelectedIndexChanged += lb_Participants_SelectedIndexChanged;
             // 
             // label1
             // 
