@@ -245,6 +245,7 @@
             Controls.Add(label1);
             Name = "Client";
             Text = "Hôm Nay Ăn Gì";
+            FormClosing += Client_FormClosing;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)ptb_Anh).EndInit();

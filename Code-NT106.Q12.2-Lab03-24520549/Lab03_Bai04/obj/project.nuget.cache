@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "nfvKXclBXLQ=",
+  "dgSpecHash": "zn5iNexxMhI=",
   "success": true,
   "projectFilePath": "C:\\Users\\Admin\\source\\repos\\NT106_Lab\\Code-NT106.Q12.2-Lab03-24520549\\Lab03_Bai04\\Lab03_Bai04.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Admin\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512"
+  ],
   "logs": []
 }

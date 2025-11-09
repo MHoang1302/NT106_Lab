@@ -19,7 +19,7 @@ namespace Lab03_Bai05
 {
     public partial class Client : Form
     {
-        private TcpClient client;   
+        private TcpClient client;
         private StreamReader reader;
         private StreamWriter writer;
 
@@ -37,11 +37,11 @@ namespace Lab03_Bai05
             string user = tb_NguoiDung.Text;
             string quyenhan = tb_QuyenHan.Text;
 
-            if(string.IsNullOrEmpty(user)||string.IsNullOrEmpty(quyenhan))
+            if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(quyenhan))
             {
                 MessageBox.Show("Vui lòng nhập tên và quyền hạn để kết nối với server", "Lỗi");
                 return;
-            } 
+            }
 
             try
             {
@@ -73,14 +73,14 @@ namespace Lab03_Bai05
             {
                 var list = JsonConvert.DeserializeObject<List<Food>>(jsonResponse);
                 lv_Food.Items.Clear();
-                foreach(var food in list)
+                foreach (var food in list)
                 {
                     ListViewItem item = new ListViewItem(food.TenMon);
                     item.SubItems.Add(food.TenNguoiThem);
                     lv_Food.Items.Add(item);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Lỗi tải danh sách", "Lỗi");
             }
@@ -88,7 +88,8 @@ namespace Lab03_Bai05
 
         private void btn_NgatKetNoi_Click(object sender, EventArgs e)
         {
-            try {
+            try
+            {
                 reader?.Close();
                 writer?.Close();
                 client?.Close();
@@ -99,7 +100,7 @@ namespace Lab03_Bai05
                 lv_Food.Items.Clear();
                 MessageBox.Show("Ngắt kết nối thành công");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Lỗi ngắt kết nối", "Lỗi");
             }
@@ -171,7 +172,8 @@ namespace Lab03_Bai05
 
         private void HandleResponse(string? jsonResponse)
         {
-            try {
+            try
+            {
                 var food = JsonConvert.DeserializeObject<Food>(jsonResponse);
 
                 tb_KQ.Text += $"Món ăn: {food.TenMon}\r\n";
@@ -192,6 +194,18 @@ namespace Lab03_Bai05
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi chọn món: {ex.Message} ", "Lỗi");
+            }
+        }
+
+        private void Client_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //Kiểm tra xem có đang kết nối không
+            if (client != null && client.Connected)
+            {
+                //Ngắt kết nối
+                reader?.Close();
+                writer?.Close();
+                client?.Close();
             }
         }
     }
